@@ -14,6 +14,9 @@ child(sansaStark, catelynStark, eddardStark ).
 child(aryaStark, eddardStark, catelynStark ).
 child(jonSnow, rhaegarTargaryen, catelynStark ).
 
+child(sansaTestChild, someDude, sansaStark ).
+
+
 /*
 starkFamily(eddardStark,jonSnow,robbStark,sansaStark,aryaStark,sansaStark).
 targaryenFamily(rhaegarTargaryen).
@@ -21,9 +24,13 @@ targaryenFamily(rhaegarTargaryen).
 
 father(Child,Father) :- male(Father),( child(Child,Father, _ ); child(Child, _ ,Father) ).
 mother(Child,Mother) :- female(Mother),( child(Child,Mother, _ ); child(Child,_ ,Mother) ).
+parent(Child, Parent1, Parent2) :- child(Child, Parent1, Parent2).
 
 sons(Parent,Sons) :- male(Sons),child(Sons, Parent, _ );child(Sons, _, Parent).
 daugthers(Parent,Daugthers) :- female(Daugthers),child(Daugthers, Parent, _ );child(Daugthers, _, Parent).
+
+ancestors(Person,Ancestors) :- father(Person, Ancestors); mother(Person, Ancestors).
+ancestors(Person1,Ancestor) :- ( father(Person1, Ancestors); mother(Person1, Ancestors) ) ,ancestors(Ancestors,Ancestor).
 
 
 
