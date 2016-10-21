@@ -19,10 +19,15 @@ starkFamily(eddardStark,jonSnow,robbStark,sansaStark,aryaStark,sansaStark).
 targaryenFamily(rhaegarTargaryen).
 */
 
-father(Child,Result) :- male(Result),( child(Child,Result, _ ); child(Child, _ ,Result) ).
-mother(Child,Result) :- female(Result),( child(Child,Result, _ ); child(Child,_ ,Result) ).
+father(Child,Father) :- male(Father),( child(Child,Father, _ ); child(Child, _ ,Father) ).
+mother(Child,Mother) :- female(Mother),( child(Child,Mother, _ ); child(Child,_ ,Mother) ).
 
-sons(Parent,Result) :- male(Result),child(Result, _, _ ).
-daugthers(Parent,Result) :- female(Result),child(Result, _, _ ).
+sons(Parent,Sons) :- male(Sons),child(Sons, Parent, _ );child(Sons, _, Parent).
+daugthers(Parent,Daugthers) :- female(Daugthers),child(Daugthers, Parent, _ );child(Daugthers, _, Parent).
 
-child(X,Y) :-
+
+
+/*
+relations(Person1, Person2, Result) :- father(Person1,Person2); mother(Person1, Person2);
+                                    sons(Person1, Person2); daugthers(Person1, Person2);
+                                    */
